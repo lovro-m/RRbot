@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot name="simple_cylinder" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <!-- TODO different number for different objects -->
+  <!-- different number for different objects -->
   <xacro:property name="number" value="$(arg number)"/>
 
   <!-- Constants for robot dimensions -->

@@ -107,11 +107,6 @@ class RobotControl:
                 self.y = self.manipulator_destination.y
                 #self.z = self.manipulator_destination.z
 
-                #print("self.x")
-                #print(self.x)
-                #print("self.y")
-                #print(self.y)
-
                 """ FOR TESTING KINEMATICS
                 #self.q1 = -1.57
                 #self.q2 = -1.57
@@ -132,10 +127,6 @@ class RobotControl:
                     #quotient = ( self.l2 * math.sin(q2) ) / (self.l1 + self.l2 * math.cos(q2) )
                     q1 = math.atan2( - self.x, self.y ) - math.atan2( ( self.l2 * math.sin(q2) ),  (self.l1 + self.l2 * math.cos(q2) ))  #also flipping here - self.x
 
-                    #print(q1)
-                    #print(q2)
-
-                    #print("\n")
                 except:
                     print("Inverse kinematics values out of robot reach. Returning to q1 = 0 and q2 = 0.")
 
@@ -187,14 +178,7 @@ class RobotControl:
             ind = self.link_states.name.index(self.link_name)
             self.link_pose = self.link_states.pose[ind]
             self.link_position = self.link_pose.position
-            #print("self.link_states.name")
-            #print(self.link_states.name)
 
-            #print("self.link_pose")
-            #print(self.link_pose)
-
-            #print("self.link_position")
-            #print(self.link_position)
         except ValueError:
             print("Value Error")
             pass

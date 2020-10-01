@@ -181,7 +181,7 @@ class image_feature:
 
         # ensure at least some circles were found
         if circles is not None:
-            print("circle found")
+            print("Circle found")
             # convert the (x, y) coordinates and radius of the circles to integers
             circles = np.round(circles[0, :]).astype("int")
             # loop over the (x, y) coordinates and radius of the circles
