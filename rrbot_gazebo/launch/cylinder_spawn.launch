@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<launch>
+    <arg name="name" default="cylinder"/>
+    <arg name="cylinder" value="$(find rrbot_description)/urdf/object.xacro"/>
+    <arg name="x"     default="1.0"/>
+    <arg name="y"     default="1.0"/>
+    <arg name="number" default="1"/>
+
+	<!-- OBJECT URDF -->
+    <param name="object_description" command="$(find xacro)/xacro --inorder $(arg cylinder) name:=$(arg name) number:=$(arg number)" />
+
+    <!-- OBJECT -->
+    <!---->
+    <!-- every time different model name -->
+    <node name="cylinder_spawn" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+        args="-urdf -model $(arg name)_$(arg number) -param object_description -x $(arg x) -y $(arg y) -z 0.0 "/>
+
+    <!-- example use -->
+    <!-- every time different number -->
+    <!-- roslaunch rrbot_gazebo cylinder_spawn.launch number:=1 x:=1 y:=0 -->
+</launch>
+
+
+ 

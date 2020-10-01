@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<robot name="simple_cylinder" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- TODO different number for different objects -->
+  <xacro:property name="number" value="$(arg number)"/>
+
+  <!-- Constants for robot dimensions -->
+  <xacro:property name="PI" value="3.1415926535897931"/>
+  <xacro:property name="mass" value="0.01" /> <!-- arbitrary value for mass -->
+  <xacro:property name="radius" value="0.15" /> <!-- Radius of Cylinder -->
+  <xacro:property name="height" value="0.25" /> <!-- Height of Cylinder -->
+
+
+  <link name="cylinder">
+    <inertial>
+      <origin xyz="0 0 0" />
+      <mass value="${mass}" />
+      <inertia  ixx="${(1/12) * mass * (3 * radius * radius + height * height)}" ixy="0.0"  ixz="0.0"  
+                iyy="${(1/12) * mass * (3 * radius * radius + height * height)}"  iyz="0.0"  
+                izz="${(1/2) * mass * radius * radius}" />
+    </inertial>
+    
+    <visual>
+      <origin xyz="0 0 0"/>
+      <geometry>
+        <cylinder radius="${radius}" length="${height}"/>
+      </geometry>
+    </visual>
+    
+    <collision>
+      <origin xyz="0 0 0"/>
+      <geometry>
+        <cylinder radius="${radius}" length="${height}"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <gazebo reference="cylinder">
+    <material>Gazebo/Yellow</material>
+  </gazebo>
+
+  <gazebo>
+    <plugin name="dipole_magnet" filename="libstorm_gazebo_dipole_magnet.so">
+      <robotNamespace>simple_cylinder</robotNamespace>   <!-- Robot name-->   
+      <bodyName>cylinder</bodyName>     <!-- Link name-->  
+      <dipole_moment>0 0 5</dipole_moment>
+      <!-- Set to false if not using ROS -->
+      <shouldPublish>true</shouldPublish>
+      <topicNs>capsule${number}</topicNs>            <!-- Topic name-->   
+      <updateRate>100</updateRate>
+      <gain>1.0</gain>                  <!-- Magnet amplify, use 1.0 to start the magnet, 0.0 to stop it -->
+    </plugin>
+  </gazebo>
+
+</robot>
